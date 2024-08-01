@@ -29,9 +29,10 @@ const DotsNavigation: React.FC<DotsNavigationProps> = ({
     }
   }, [numberSlide, onCLick, movies]);
 
-  const handleDotClick = (index: number) => {
-    setNumberSlide(index);
-    onCLick(movies[index].id);
+  const handleClickSlide = (id: number) => {
+    const num = movies.findIndex((movie) => movie.id === id);
+    setNumberSlide(num);
+    onCLick(id);
   };
 
   return (
@@ -41,7 +42,7 @@ const DotsNavigation: React.FC<DotsNavigationProps> = ({
           <SlideDot
             key={movie.id}
             isActive={currentSlide === movie.id}
-            onClick={() => handleDotClick(movie.id)}
+            onClick={() => handleClickSlide(movie.id)}
           />
         ))}
       </ul>
