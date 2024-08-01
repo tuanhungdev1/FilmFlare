@@ -17,6 +17,8 @@ axiosInstance.interceptors.request.use(
     config.headers[
       "Authorization"
     ] = `Bearer ${process.env.MOVIE_APP_API_READ_ACCESS_TOKEN}`;
+
+    
     return config;
   },
   (error) => {
@@ -26,7 +28,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
-    return response.data;
+    return response;
   },
   (error) => {
     return Promise.reject(error);

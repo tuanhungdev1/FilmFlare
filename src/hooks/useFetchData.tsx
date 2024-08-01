@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
 interface UseFetchDataResult<T> {
@@ -7,7 +7,9 @@ interface UseFetchDataResult<T> {
   error: AxiosError | null;
 }
 
-const useFetchData = <T,>(apiCall: () => Promise<T>): UseFetchDataResult<T> => {
+const useFetchData = <T,>(
+  apiCall: () => Promise<AxiosResponse<T>>
+): UseFetchDataResult<T> => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<AxiosError | null>(null);
@@ -16,7 +18,7 @@ const useFetchData = <T,>(apiCall: () => Promise<T>): UseFetchDataResult<T> => {
     const fetchData = async () => {
       try {
         const result = await apiCall();
-        setData(result);
+        setData(result.data);
       } catch (err) {
         setError(err as AxiosError);
       } finally {
