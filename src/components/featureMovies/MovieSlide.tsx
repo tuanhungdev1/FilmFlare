@@ -1,13 +1,12 @@
 import { BASE_URL_IMAGE } from "../../constants/apiConstants";
-import { Movie } from "../../types/type";
+import { MoviePopular } from "../../types/type";
 import { IconPlayVideo } from "../icons";
 
 interface MovieSlideProps {
-  movieData: Movie;
+  movieData: MoviePopular;
 }
 
 const MovieSlide: React.FC<MovieSlideProps> = ({ movieData }) => {
-  console.log(`${BASE_URL_IMAGE}${movieData.backdrop_path}`);
   return (
     <div>
       <img

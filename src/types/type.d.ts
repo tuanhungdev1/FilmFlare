@@ -13,10 +13,20 @@ export interface Movie {
   popularity: number;
   poster_path: string;
   release_date: string;
-  title: string;
+  title?: string;
   video: boolean;
+  media_type: string;
   vote_average: number;
   vote_count: number;
+}
+
+export interface MoviePopular extends Movie {}
+
+export interface Trending extends Movie {
+  original_language: string;
+  media_type: string;
+  name?: string;
+  first_air_date?: string;
 }
 
 export interface MovieList {
@@ -24,4 +34,10 @@ export interface MovieList {
   result: Movie[];
   total_pages: number;
   total_results: number;
+}
+
+export interface Tab {
+  id: string;
+  name: string;
+  url: string;
 }

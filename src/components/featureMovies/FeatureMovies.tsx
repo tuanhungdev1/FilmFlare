@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import DotsNavigation from "./DotsNavigation";
 import MovieSlide from "./MovieSlide";
-import { Movie } from "../../types/type";
+import { MoviePopular } from "../../types/type";
+import { ENDPOINTS } from "../../constants/apiConstants";
 
 const FeatureMovies = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<MoviePopular[]>([]);
   const [activeMovieId, setActiveMovieId] = useState<number>(0);
 
   const handleSetActiveMovie = (id: number) => {
@@ -12,7 +13,7 @@ const FeatureMovies = () => {
   };
 
   useEffect(() => {
-    fetch("https://api.themoviedb.org/3/movie/popular", {
+    fetch(`${ENDPOINTS.POPULAR_MOVIES}`, {
       method: "GET",
       headers: {
         accept: "application/json",
@@ -21,13 +22,12 @@ const FeatureMovies = () => {
       },
     }).then(async (res) => {
       const data = await res.json();
+      console.log(data);
       const popularMovies = data.results.slice(0, 4);
       setMovies(popularMovies);
       setActiveMovieId(popularMovies[0].id);
     });
   }, []);
-  console.log(activeMovieId);
-  console.log(movies);
 
   return (
     <div className="relative text-white">

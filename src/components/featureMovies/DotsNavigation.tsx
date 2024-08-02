@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Movie } from "../../types/type";
+import { MoviePopular } from "../../types/type";
 import { SlideDot } from "../common";
 
 interface DotsNavigationProps {
-  movies: Movie[];
+  movies: MoviePopular[];
   currentSlide: number;
   onCLick: (index: number) => void;
 }
