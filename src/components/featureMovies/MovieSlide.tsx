@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BASE_URL_IMAGE } from "../../constants/apiConstants";
 import { MoviePopular } from "../../types/type";
 import { IconPlayVideo } from "../icons";
@@ -31,9 +32,11 @@ const MovieSlide: React.FC<MovieSlideProps> = ({ movieData }) => {
             <button className="flex items-center px-4 py-2 text-black bg-white rounded item mr- text-10 lg:text-lg">
               <IconPlayVideo /> Trailer
             </button>
-            <button className="px-4 py-2 rounded text-10 bg-slate-300/35 lg:text-lg">
-              View Detail
-            </button>
+            <Link to={`/movie/${movieData.id}`}>
+              <button className="px-4 py-2 rounded text-10 bg-slate-300/35 lg:text-lg">
+                View Detail
+              </button>
+            </Link>
           </div>
         </div>
       </div>
