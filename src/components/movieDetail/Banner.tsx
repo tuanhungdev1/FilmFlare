@@ -5,15 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { groupBy } from "lodash";
 import React from "react";
+import { ColorCircularProgress } from "../../types/enums";
+import { IMovieDetail } from "src/types/type";
 
 interface BannerProps {
   mediaInfo: IMovieDetail | null;
 }
 
 const Banner: React.FC<BannerProps> = ({ mediaInfo }) => {
-  const certification = (mediaInfo?.release_dates || [])
-    .find((release_date) => release_date.iso_3166_1 == "US")
-    ?.release_dates.find((result) => result.certification)?.certification;
+  const certification = mediaInfo?.release_dates.results
+    .find((result) => result.iso_3166_1 === "US")
+    ?.release_dates.find(
+      (releaseDate) => releaseDate.certification
+    )?.certification;
 
   const crews = mediaInfo?.credits.crew
     ?.filter((crew) => ["Director", "Screenplay", "Writer"].includes(crew.job))

@@ -1,6 +1,6 @@
 import React from "react";
 import { CircularProgressBarIcon } from "../icons";
-import { ColorCircularProgress } from "../../types/enum";
+import { ColorCircularProgress } from "../../types/enums";
 
 interface MovieCardProps {
   title?: string;

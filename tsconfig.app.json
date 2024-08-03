@@ -30,7 +30,6 @@
       "@constants/*": ["src/constants/*"],
       "@layout": ["src/layout"],
       "@pages/*": ["src/pages/*"],
-      "@types/*": ["src/types/*"],
       "@pages": ["src/pages"]
     }
   },

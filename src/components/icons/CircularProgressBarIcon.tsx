@@ -1,4 +1,4 @@
-import { ColorCircularProgress } from "../../types/enum";
+import { ColorCircularProgress } from "../../types/enums";
 
 interface CircularProgressBarIconProps {
   percent: number;

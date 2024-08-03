@@ -95,7 +95,7 @@ export interface Crew {
 }
 
 export interface Credit {
-  cast : Cast[];
+  cast: Cast[];
   crew: Crew[];
 }
 
@@ -127,5 +127,9 @@ export interface IMovieDetail extends Movie {
   status: string;
   tagline: string;
   credits: Credit;
-  release_dates: ReleaseDate[];
+  release_dates: ReleaseDatesForMovie;
+}
+
+interface ReleaseDatesForMovie {
+  results: ReleaseDate[];
 }
