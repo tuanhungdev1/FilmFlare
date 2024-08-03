@@ -13,7 +13,7 @@ interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ mediaInfo }) => {
-  const certification = mediaInfo?.release_dates.results
+  const certification = (mediaInfo?.release_dates.results || [])
     .find((result) => result.iso_3166_1 === "US")
     ?.release_dates.find(
       (releaseDate) => releaseDate.certification
@@ -76,24 +76,19 @@ const Banner: React.FC<BannerProps> = ({ mediaInfo }) => {
           </div>
           <div className="mt-4">
             <p className="mb-2 text-[1.3vw] font-bold">Overview</p>
-            <p>{mediaInfo?.overview}</p>
+            <p className="hidden text-sm md:block md:text-sm lg:text-xl">
+              {mediaInfo?.overview}
+            </p>
           </div>
           <div className="grid grid-cols-2 gap-2 mt-4">
             {Object.keys(groupedCrews).map((job) => (
               <div key={job}>
                 <p className="font-bold">{job}</p>
-                <p>{groupedCrews[job].map((crew) => crew.name).join(", ")}</p>
+                <p className="text-sm lg:text-xl">
+                  {groupedCrews[job].map((crew) => crew.name).join(", ")}
+                </p>
               </div>
             ))}
-
-            <div>
-              <p className="font-bold">Director</p>
-              <p>Jennifer Phang</p>
-            </div>
-            <div>
-              <p className="font-bold">Writer</p>
-              <p>Dan Frey, Russell Sommer</p>
-            </div>
           </div>
         </div>
       </div>
