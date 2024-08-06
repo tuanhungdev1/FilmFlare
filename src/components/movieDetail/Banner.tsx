@@ -33,7 +33,7 @@ const Banner: React.FC<BannerProps> = ({ mediaInfo }) => {
   return (
     <div className="relative overflow-hidden text-white">
       <img
-        className="absolute inset-0 brightness-[.2]"
+        className="absolute inset-0 brightness-[.2] w-full"
         src={`https://image.tmdb.org/t/p/original${mediaInfo?.backdrop_path}`}
       />
       <div className="relative flex max-w-screen-xl gap-6 px-6 py-10 mx-auto lg:gap-8">
