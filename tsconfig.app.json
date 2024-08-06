@@ -30,7 +30,8 @@
       "@constants/*": ["src/constants/*"],
       "@layout": ["src/layout"],
       "@pages/*": ["src/pages/*"],
-      "@pages": ["src/pages"]
+      "@pages": ["src/pages"],
+      "@api/*": ["src/api/*"]
     }
   },
   "include": ["src/**/*"]

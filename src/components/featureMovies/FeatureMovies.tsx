@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import DotsNavigation from "./DotsNavigation";
 import MovieSlide from "./MovieSlide";
-import { MoviePopular } from "../../types/type";
+import { MovieList, MoviePopular } from "../../types/type";
 import { ENDPOINTS } from "../../constants/apiConstants";
+import useFetchData from "@hooks/useFetchData";
+import axiosInstance from "@api/axiosConfig";
 
 const FeatureMovies = () => {
   const [movies, setMovies] = useState<MoviePopular[]>([]);
@@ -12,30 +14,25 @@ const FeatureMovies = () => {
     setActiveMovieId(id);
   };
 
+  const { data: moviesResponse } = useFetchData<MovieList>(
+    () => axiosInstance.get<MovieList>(ENDPOINTS.POPULAR_MOVIES),
+    []
+  );
+
   useEffect(() => {
-    fetch(`${ENDPOINTS.POPULAR_MOVIES}`, {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YjdiZDc2MzY5NjRlMDNiMWM1OGU4MTM3NDgyNzk4NCIsIm5iZiI6MTcyMDE4ODA4OS43NDAyNzQsInN1YiI6IjY2ODdmYjQ0YzA4NjJhYmVlYWQ0ZGVjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4gCFYDDyvipIesrHjs10NCVvhLG_jdh33R9uXj4VBaI",
-      },
-    }).then(async (res) => {
-      const data = await res.json();
-      console.log(data);
-      const popularMovies = data.results.slice(0, 4);
+    if (moviesResponse) {
+      const popularMovies = moviesResponse.results.slice(0, 4);
       setMovies(popularMovies);
       setActiveMovieId(popularMovies[0].id);
-    });
-  }, []);
+    }
+  }, [moviesResponse]);
 
   return (
     <div className="relative text-white">
-      {movies
-        .filter((movie) => movie.id == activeMovieId)
-        .map((movie) => (
-          <MovieSlide key={movie.id} movieData={movie} />
-        ))}
+      {movies.length > 0 &&
+        movies
+          .filter((movie) => movie.id == activeMovieId)
+          .map((movie) => <MovieSlide key={movie.id} movieData={movie} />)}
       <DotsNavigation
         movies={movies}
         currentSlide={activeMovieId}

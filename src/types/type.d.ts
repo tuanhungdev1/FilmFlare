@@ -31,7 +31,23 @@ export interface Trending extends Movie {
 
 export interface MovieList {
   page: number;
-  result: Movie[];
+  results: MoviePopular[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface MovieTrendingList {
+  page: number;
+  results: Trending[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface MovieRecommendation extends Movie {}
+
+export interface MovieRecommendationList {
+  page: number;
+  results: MovieRecommendation[];
   total_pages: number;
   total_results: number;
 }
@@ -128,6 +144,7 @@ export interface IMovieDetail extends Movie {
   tagline: string;
   credits: Credit;
   release_dates: ReleaseDatesForMovie;
+  origin_country: string[];
 }
 
 interface ReleaseDatesForMovie {

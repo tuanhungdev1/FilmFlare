@@ -3,14 +3,20 @@ export const BASE_URL_IMAGE = "https://image.tmdb.org/t/p/original";
 
 export const ENDPOINTS = {
   // POPULAR
-  POPULAR_MOVIES: `${BASE_URL}/movie/popular`,
+  POPULAR_MOVIES: `/movie/popular`,
 
   // TOP_RATED
-  MOVIES_TOP_RATED: `${BASE_URL}/movie/top_rated`,
-  TV_SHOWS_TOP_RATED: `${BASE_URL}/tv/top_rated`,
+  MOVIES_TOP_RATED: `/movie/top_rated`,
+  TV_SHOWS_TOP_RATED: `/tv/top_rated`,
 
   // TRENDING
-  MOVIES_AND_TV_SHOWS_TRENDING: `${BASE_URL}/trending/all/day`,
-  MOVIES_TRENDING: `${BASE_URL}/trending/movie/day`,
-  TV_SHOWS_TRENDING: `${BASE_URL}/trending/tv/day`,
+  MOVIES_AND_TV_SHOWS_TRENDING: `/trending/all/day`,
+  MOVIES_TRENDING: `/trending/movie/day`,
+  TV_SHOWS_TRENDING: `/trending/tv/day`,
+
+  //MOVIE_DETAIL
+  MOVIE_DETAIL: (ID: string) =>
+    `/movie/${ID}?append_to_response=release_dates,credits`,
+
+  MOVIES_RECOMMENDATION: (ID: string) => `/movie/${ID}/recommendations`,
 };

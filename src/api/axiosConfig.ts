@@ -14,11 +14,10 @@ const axiosInstance: AxiosInstance = axios.create(axiosConfig);
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    config.headers[
-      "Authorization"
-    ] = `Bearer ${process.env.MOVIE_APP_API_READ_ACCESS_TOKEN}`;
+    config.headers["Authorization"] = `Bearer ${
+      import.meta.env.VITE_MOVIE_APP_API_READ_ACCESS_TOKEN
+    }`;
 
-    
     return config;
   },
   (error) => {

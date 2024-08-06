@@ -13,8 +13,10 @@ const ActorList: React.FC<ActorListProps> = ({ actors }) => {
 
   return (
     <div>
-      <p className="mb-4 text-[1.4vw] font-bold">Actors</p>
-      <div className="grid grid-cols-3 gap-4 sm:grid-cols-4">
+      <p className="mb-4 text-[1.4vw] font-bold text-xl md:text-base lg:text-xl">
+        Actors
+      </p>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {currentActors.map((actor) => (
           <ActorInfo key={actor.id} cast={actor} />
         ))}

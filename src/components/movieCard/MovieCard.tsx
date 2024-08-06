@@ -21,8 +21,8 @@ const MovieCard: React.FC<MovieCardProps> = ({
   releaseDate,
 }) => {
   return (
-    <Link to={`/movie/${id}`}>
-      <div className="relative border rounded-lg border-slate-800">
+    <Link to={`/movie/${id}`} className="border rounded-lg border-slate-800">
+      <div className="relative text-sm md:text-sm lg:text-xl">
         {mediaType === "tv" && (
           <p className="absolute p-1 text-sm text-white bg-black rounded shadow-md right-1 top-1">
             TV Show
@@ -45,7 +45,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 : ColorCircularProgress.GREEN
             }
           />
-          <p className="mt-2 font-bold">{title}</p>
+          <p className="mt-2 text-base font-bold lg:text-xl">{title}</p>
           <p className="text-slate-300">{releaseDate}</p>
         </div>
       </div>

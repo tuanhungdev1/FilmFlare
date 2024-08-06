@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { Tab, Trending } from "../../types/type";
+import { MovieTrendingList, Tab, Trending } from "../../types/type";
 import { MovieCard } from "../movieCard";
+import useFetchData from "@hooks/useFetchData";
+import axiosInstance from "@api/axiosConfig";
 
 interface MediaListProps {
   title: string;
@@ -10,26 +12,26 @@ interface MediaListProps {
 const MediaList: React.FC<MediaListProps> = ({ title, tabs }) => {
   const [mediaList, setMediaList] = useState<Trending[]>([]);
   const [activeTabId, setActiveTabId] = useState<string>(tabs[0].id);
+  const URL = tabs.find((tab) => tab.id === activeTabId)?.url;
+
+  const { data: dataResponse } = useFetchData<MovieTrendingList>(
+    () => axiosInstance.get<MovieTrendingList>(URL!),
+    [URL]
+  );
+  useEffect(() => {
+    if (dataResponse) {
+      const trendingMediaList = dataResponse.results.slice(0, 12);
+      setMediaList(trendingMediaList);
+    }
+  }, [dataResponse]);
 
   useEffect(() => {
-    const URL = tabs.find((tab) => tab.id === activeTabId)?.url;
-
-    if (URL) {
-      fetch(URL, {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YjdiZDc2MzY5NjRlMDNiMWM1OGU4MTM3NDgyNzk4NCIsIm5iZiI6MTcyMDE4ODA4OS43NDAyNzQsInN1YiI6IjY2ODdmYjQ0YzA4NjJhYmVlYWQ0ZGVjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4gCFYDDyvipIesrHjs10NCVvhLG_jdh33R9uXj4VBaI",
-        },
-      }).then(async (res) => {
-        const data = await res.json();
-        console.log({ data });
-        const trendingMediaList = data.results.slice(0, 12);
-        setMediaList(trendingMediaList);
-      });
+    if (dataResponse) {
+      const trendingMediaList = dataResponse.results.slice(0, 12);
+      setMediaList(trendingMediaList);
     }
-  }, [activeTabId, tabs]);
+  }, [dataResponse]);
+
   return (
     <div className="bg-black px-8 py-10 text-[1.2vw] text-white">
       <div className="flex items-center gap-4 mb-6">
@@ -51,7 +53,7 @@ const MediaList: React.FC<MediaListProps> = ({ title, tabs }) => {
       <div className="grid grid-cols-2 gap-4 lg:gap-6 sm:grid-cols-4 lg:grid-cols-6">
         {mediaList.map((media) => (
           <MovieCard
-          id={media.id}
+            id={media.id}
             key={media.id}
             title={media.title || media.name}
             releaseDate={media.release_date || media.first_air_date}
