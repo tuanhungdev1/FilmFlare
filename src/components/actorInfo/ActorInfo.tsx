@@ -1,5 +1,6 @@
 import { Cast } from "src/types/type";
 import TemplateImage from "../../assets/images/ActorNoImage.svg";
+import { ImageComponent } from "@components/image";
 
 interface ActorInfoProps {
   cast: Cast;
@@ -8,7 +9,9 @@ interface ActorInfoProps {
 const ActorInfo: React.FC<ActorInfoProps> = ({ cast }) => {
   return (
     <div className="bg-black border rounded-lg shadow-sm border-slate-300">
-      <img
+      <ImageComponent
+        height={350}
+        width={276}
         className="rounded-lg"
         src={
           cast.profile_path

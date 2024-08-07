@@ -2,6 +2,7 @@ import React from "react";
 import { CircularProgressBarIcon } from "../icons";
 import { ColorCircularProgress } from "../../types/enums";
 import { Link } from "react-router-dom";
+import { ImageComponent } from "@components/image";
 
 interface MovieCardProps {
   id: number;
@@ -28,8 +29,10 @@ const MovieCard: React.FC<MovieCardProps> = ({
             TV Show
           </p>
         )}
-        <img
-          className="rounded-lg"
+        <ImageComponent
+          width={210}
+          height={300}
+          className="w-full rounded-lg"
           src={`https://image.tmdb.org/t/p/w500${poster}`}
         />
         <div className="relative -top-[1.5vw] px-4">

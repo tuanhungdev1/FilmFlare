@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BASE_URL_IMAGE } from "../../constants/apiConstants";
 import { MoviePopular } from "../../types/type";
 import { IconPlayVideo } from "../icons";
+import { ImageComponent } from "@components/image";
 
 interface MovieSlideProps {
   movieData: MoviePopular;
@@ -10,9 +11,10 @@ interface MovieSlideProps {
 const MovieSlide: React.FC<MovieSlideProps> = ({ movieData }) => {
   return (
     <div>
-      <img
+      <ImageComponent
         src={`${BASE_URL_IMAGE}${movieData.backdrop_path}`}
-        alt="poster"
+        width={900}
+        height={500}
         className="object-cover w-full aspect-video brightness-50"
       />
       <div className="absolute bottom-[10%] left-8 w-1/2 sm:w-1/3">

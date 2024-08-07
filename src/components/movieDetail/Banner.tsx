@@ -7,6 +7,7 @@ import { groupBy } from "lodash";
 import React from "react";
 import { ColorCircularProgress } from "../../types/enums";
 import { IMovieDetail } from "src/types/type";
+import { ImageComponent } from "@components/image";
 
 interface BannerProps {
   mediaInfo: IMovieDetail | null;
@@ -32,13 +33,15 @@ const Banner: React.FC<BannerProps> = ({ mediaInfo }) => {
   console.log({ crews, groupedCrews });
   return (
     <div className="relative overflow-hidden text-white">
-      <img
+      <ImageComponent
         className="absolute inset-0 brightness-[.2] w-full"
         src={`https://image.tmdb.org/t/p/original${mediaInfo?.backdrop_path}`}
       />
       <div className="relative flex max-w-screen-xl gap-6 px-6 py-10 mx-auto lg:gap-8">
         <div className="flex-1">
-          <img
+          <ImageComponent
+            width={600}
+            height={900}
             src={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2${mediaInfo?.poster_path}`}
           />
         </div>
