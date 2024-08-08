@@ -19,4 +19,10 @@ export const ENDPOINTS = {
     `/movie/${ID}?append_to_response=release_dates,credits`,
 
   MOVIES_RECOMMENDATION: (ID: string) => `/movie/${ID}/recommendations`,
+
+  //TV_SHOW_DETAIL
+  TV_SHOW_DETAIL: (ID: string) =>
+    `/tv/${ID}?append_to_response=content_ratings,aggregate_credits,videos`,
+
+  TV_SHOW_RECOMMENDATION: (ID: string) => `/tv/${ID}/recommendations`,
 };

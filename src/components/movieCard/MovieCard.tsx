@@ -22,7 +22,10 @@ const MovieCard: React.FC<MovieCardProps> = ({
   releaseDate,
 }) => {
   return (
-    <Link to={`/movie/${id}`} className="border rounded-lg border-slate-800">
+    <Link
+      to={`${mediaType === "tv" ? `/tvshow/${id}` : `/movie/${id}`}`}
+      className="border rounded-lg border-slate-800"
+    >
       <div className="relative text-sm md:text-sm lg:text-xl">
         {mediaType === "tv" && (
           <p className="absolute p-1 text-sm text-white bg-black rounded shadow-md right-1 top-1">
